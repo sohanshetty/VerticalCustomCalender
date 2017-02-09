@@ -1,3 +1,4 @@
+/*
 package com.example.sohan.verticalcustomcalender;
 
 import android.graphics.Color;
@@ -15,9 +16,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+*/
 /**
  * Created by sohan on 6/2/17.
- */
+ *//*
+
 
 public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
 
@@ -160,3 +163,4 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
         void onDateSelected(List<Date> dateList);
     }
 }
+*/

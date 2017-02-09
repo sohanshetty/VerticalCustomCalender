@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:background="@color/white">
 
 
     <TextView
@@ -10,15 +11,401 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:visibility="visible"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/horizontal_recycler_view"
+    <TableLayout
+        android:id="@+id/table_layout_id"
         android:layout_width="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
 
-    </android.support.v7.widget.RecyclerView>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="7">
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_span="1"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="7">
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_span="1"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="7">
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_span="1"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="7">
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_span="1"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="7">
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_span="1"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="7">
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_span="1"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+            <CheckBox
+                android:button="@null"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="01"
+                />
+
+
+
+        </TableRow>
+
+    </TableLayout>
 
 </LinearLayout>

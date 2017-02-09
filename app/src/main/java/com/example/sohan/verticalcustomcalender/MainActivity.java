@@ -1,14 +1,14 @@
 package com.example.sohan.verticalcustomcalender;
 
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements HorizontalAdapter.DateSelectionListener{
+public class MainActivity extends AppCompatActivity implements VerticalAdapter.DateSelectionListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements HorizontalAdapter
         setContentView(R.layout.activity_main);
         CustomVerticalCalenderView customVerticalCalenderView = (CustomVerticalCalenderView)
                 findViewById(R.id.custom_calender_view);
-        customVerticalCalenderView.setFromYear(2016);
+        customVerticalCalenderView.setFromYear(2014);
         customVerticalCalenderView.setToYear(2017);
         customVerticalCalenderView.updateCalendar();
         customVerticalCalenderView.setDateSelectionColor(ContextCompat.getColor(this, R.color.colorAccent));

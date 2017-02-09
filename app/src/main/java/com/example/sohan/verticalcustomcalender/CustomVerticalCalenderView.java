@@ -23,7 +23,7 @@ import java.util.Map;
  * Created by sohan on 6/2/17.
  */
 
-public class CustomVerticalCalenderView extends LinearLayout implements HorizontalAdapter.DateSelectionListener {
+public class CustomVerticalCalenderView extends LinearLayout implements VerticalAdapter.DateSelectionListener {
     private static final int DAYS_COUNT = 42;
     private static final String TAG = CustomVerticalCalenderView.class.getSimpleName();
     private static int mDateSelectionColor;
@@ -31,7 +31,7 @@ public class CustomVerticalCalenderView extends LinearLayout implements Horizont
     // current displayed month
     private Calendar currentDate = Calendar.getInstance();
     private RecyclerView mRecyclerVerticalView;
-    private HorizontalAdapter.DateSelectionListener mListener;
+    private VerticalAdapter.DateSelectionListener mListener;
     private int mFromYear = 2017;
     private int mToYear = 2017;
 
@@ -82,7 +82,7 @@ public class CustomVerticalCalenderView extends LinearLayout implements Horizont
     }
 
     private void clearDateSelectionList() {
-        HorizontalAdapter.mselectedDate.clear();
+        VerticalAdapter.mselectedDate.clear();
     }
 
     public void updateCalendar() {
@@ -180,7 +180,7 @@ public class CustomVerticalCalenderView extends LinearLayout implements Horizont
         return 0;
     }
 
-    public void setListener(HorizontalAdapter.DateSelectionListener listener){
+    public void setListener(VerticalAdapter.DateSelectionListener listener){
         mListener = listener;
 
     }
