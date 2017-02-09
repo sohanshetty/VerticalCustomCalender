@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:gravity="center"
+        android:minHeight="35dp"
+        android:text="00"
+        android:checked="false"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.Medium"/>
+</LinearLayout>
