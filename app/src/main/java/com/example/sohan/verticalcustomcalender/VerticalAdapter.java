@@ -88,16 +88,15 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
             int tableRowChildCount = tableRow.getChildCount();
             for (int j = 0; j < tableRowChildCount; j++){
                  CheckBox checkBox = (CheckBox) tableRow.getChildAt(j);
-                 Date date = dateList.get(dateListIndexCount);
+                 Date dateOBj = dateList.get(dateListIndexCount);
                  Calendar calendar = Calendar.getInstance();
-                 calendar.setTime(date);
-                 int day = calendar.get(Calendar.DATE);
+                 calendar.setTime(dateOBj);
+                 int date = calendar.get(Calendar.DATE);
                  int month = calendar.get(Calendar.MONTH);
                  int year = calendar.get(Calendar.YEAR);
-                 int listDate = calendar.get(Calendar.DATE);
                  checkBox.setTag(calendar);
-                 checkBox.setText(String.valueOf(listDate));
-                 setBackgroundColor(checkBox, day, month, year, currentMonth, Calendar.getInstance());
+                 checkBox.setText(String.valueOf(date));
+                 setBackgroundColor(checkBox, date, month, year, currentMonth, Calendar.getInstance());
                  checkBox.setOnCheckedChangeListener(this);
                  dateListIndexCount ++;
             }
