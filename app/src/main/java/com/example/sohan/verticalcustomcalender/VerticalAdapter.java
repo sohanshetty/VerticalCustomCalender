@@ -121,7 +121,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
             checkBox.setTypeface(null, Typeface.BOLD);
             checkBox.setTextColor(ContextCompat.getColor(checkBox.getContext(), R.color.colorPrimary));
         }
-
+        checkBox.setBackgroundColor(ContextCompat.getColor(checkBox.getContext(), R.color.white));
         if (mselectedDate.size() > 0 && month == currentMonth) {
             Calendar selectedCalender = Calendar.getInstance();
             for (Date date : mselectedDate) {
