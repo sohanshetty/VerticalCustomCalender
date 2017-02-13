@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +28,11 @@ import java.util.List;
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder> implements CompoundButton.OnCheckedChangeListener{
 
 
+    private static final String TAG = VerticalAdapter.class.getSimpleName();
     private final DateSelectionListener mListener;
     private LinkedHashMap<String, List<Date>> mVerticalWrapperDataList;
     public static List<Date> mselectedDate = new ArrayList<>();
+    private List<Calendar> mfromCalender = new ArrayList<>();
 
     public VerticalAdapter(LinkedHashMap<String, List<Date>> verticalWrapperList,
                            DateSelectionListener listener) {
@@ -104,25 +107,27 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
     }
 
     private void setBackgroundColor(CheckBox checkBox, int day, int month, int year, int currentMonth,Calendar today) {
+        checkBox.setBackgroundColor(ContextCompat.getColor(checkBox.getContext(), R.color.white));
         // clear styling
         checkBox.setTypeface(null, Typeface.NORMAL);
         checkBox.setTextColor(Color.BLACK);
-        if (month != currentMonth) {
-            // if this day is outside current month, grey it out
-            checkBox.setTextColor(Color.GRAY);
-            checkBox.setEnabled(false);
-        } else {
-            checkBox.setTextColor(Color.BLACK);
-            checkBox.setEnabled(true);
-        }
+
         if (day == today.get(Calendar.DATE) && month == today.get(Calendar.MONTH) &&
                 year == today.get(Calendar.YEAR) && month == currentMonth) {
             // if it is today, set it to blue/bold
             checkBox.setTypeface(null, Typeface.BOLD);
             checkBox.setTextColor(ContextCompat.getColor(checkBox.getContext(), R.color.colorPrimary));
+        } else {
+            if (month != currentMonth) {
+                // if this day is outside current month, grey it out
+                checkBox.setTextColor(Color.GRAY);
+                checkBox.setEnabled(false);
+            } else {
+                checkBox.setTextColor(Color.BLACK);
+                checkBox.setEnabled(true);
+            }
         }
-        checkBox.setBackgroundColor(ContextCompat.getColor(checkBox.getContext(), R.color.white));
-        if (mselectedDate.size() > 0 && month == currentMonth) {
+        if (mselectedDate.size() > 0 && month == currentMonth) {// retain  checkbox state while scrolling
             Calendar selectedCalender = Calendar.getInstance();
             for (Date date : mselectedDate) {
                 selectedCalender.setTime(date);
@@ -137,7 +142,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
                     break;
                 } else {
                     Calendar todayCalender = Calendar.getInstance();
-                    checkBoxUnSelectedState(checkBox, todayCalender, selectedCalender);
+                    //checkBoxUnSelectedState(checkBox, todayCalender, selectedCalender);
                 }
             }
         }
@@ -176,8 +181,62 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
         CheckBox checkBox = (CheckBox) compoundButton;
         Calendar seletedDate = (Calendar) checkBox.getTag();
-        Date date = seletedDate.getTime();
         Calendar calendar = Calendar.getInstance();
+        if (CustomVerticalCalenderView.isRange()) {
+            if (mfromCalender.size() == 0) {
+                mfromCalender.add(seletedDate);
+                mselectedDate.clear();
+                mselectedDate.add(seletedDate.getTime());
+                notifyDataSetChanged();
+
+            } else {
+                mselectedDate.clear();
+                final Calendar fromcalendar = mfromCalender.get(0);
+                int fromDate = fromcalendar.get(Calendar.DATE);
+                int fronMonth = fromcalendar.get(Calendar.MONTH);
+                int fromYear = fromcalendar.get(Calendar.YEAR);
+
+                int toDate = seletedDate.get(Calendar.DATE);
+                int toMonth = seletedDate.get(Calendar.MONTH);
+                int toYear = seletedDate.get(Calendar.YEAR);
+
+                if (fromDate <= toDate || fronMonth < toMonth || fromYear < toYear) {
+                    while (fromDate <= toDate || fronMonth < toMonth || fromYear < toYear) {
+                        Date rangeDate = fromcalendar.getTime();
+                        mselectedDate.add(rangeDate);
+                        fromcalendar.add(Calendar.DAY_OF_MONTH, 1);
+                        fromDate = fromcalendar.get(Calendar.DATE);
+                        fronMonth = fromcalendar.get(Calendar.MONTH);
+                        fromYear = fromcalendar.get(Calendar.YEAR);
+
+                        if (fronMonth > toMonth && fromYear == toYear) {
+                            break;
+                        }
+                    }
+                    mfromCalender.clear();
+                    mListener.onDateSelected(mselectedDate);
+                } else {
+                    mfromCalender.clear();
+                    mfromCalender.add(seletedDate);
+                    singleCheck(true, checkBox, seletedDate, calendar);
+                }
+                notifyDataSetChanged();
+                Log.d(TAG, "Range Date Size " + mselectedDate.size());
+
+
+            }
+        } else {
+            singleCheck(checked, checkBox, seletedDate, calendar);
+            mListener.onDateSelected(mselectedDate);
+        }
+
+        Log.d(TAG, "final size " + mselectedDate.size());
+
+    }
+
+    private void singleCheck(boolean checked, CheckBox checkBox, Calendar seletedDate,
+                             Calendar calendar) {
+        Date date = seletedDate.getTime();
         if (checked) {
             checkBoxSelectedState(checkBox);
             if (!mselectedDate.contains(date)) {
@@ -187,7 +246,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
             mselectedDate.remove(date);
             checkBoxUnSelectedState(checkBox, calendar, seletedDate);
         }
-        mListener.onDateSelected(mselectedDate);
     }
 
     public final  class Holder extends RecyclerView.ViewHolder {

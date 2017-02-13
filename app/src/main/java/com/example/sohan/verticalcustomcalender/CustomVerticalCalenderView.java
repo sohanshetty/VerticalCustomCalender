@@ -34,6 +34,7 @@ public class CustomVerticalCalenderView extends LinearLayout implements Vertical
     private VerticalAdapter.DateSelectionListener mListener;
     private int mFromYear = 2017;
     private int mToYear = 2017;
+    private static boolean mRange;
 
     public CustomVerticalCalenderView(Context context) {
         super(context);
@@ -183,6 +184,14 @@ public class CustomVerticalCalenderView extends LinearLayout implements Vertical
     public void setListener(VerticalAdapter.DateSelectionListener listener){
         mListener = listener;
 
+    }
+
+    public static void setRange(boolean isRange){
+        mRange = isRange;
+    }
+
+    public static boolean isRange(){
+        return mRange;
     }
 
     @Override
