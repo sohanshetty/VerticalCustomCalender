@@ -31,7 +31,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
     private static final String TAG = VerticalAdapter.class.getSimpleName();
     private final DateSelectionListener mListener;
     private LinkedHashMap<String, List<Date>> mVerticalWrapperDataList;
-    public static List<Date> mselectedDate = new ArrayList<>();
+    public static List<Date> mselectedDateList = new ArrayList<>();
     private List<Calendar> mfromCalender = new ArrayList<>();
 
     public VerticalAdapter(LinkedHashMap<String, List<Date>> verticalWrapperList,
@@ -127,9 +127,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
                 checkBox.setEnabled(true);
             }
         }
-        if (mselectedDate.size() > 0 && month == currentMonth) {// retain  checkbox state while scrolling
+        if (mselectedDateList.size() > 0 && month == currentMonth) {// retain  checkbox state while scrolling
             Calendar selectedCalender = Calendar.getInstance();
-            for (Date date : mselectedDate) {
+            for (Date date : mselectedDateList) {
                 selectedCalender.setTime(date);
                 int selectedDay = selectedCalender.get(Calendar.DATE);
                 int selectedMonth = selectedCalender.get(Calendar.MONTH);
@@ -141,7 +141,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
                     checkBox.setOnCheckedChangeListener(this);
                     break;
                 } else {
-                    Calendar todayCalender = Calendar.getInstance();
+                   // Calendar todayCalender = Calendar.getInstance();
                     //checkBoxUnSelectedState(checkBox, todayCalender, selectedCalender);
                 }
             }
@@ -185,12 +185,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
         if (CustomVerticalCalenderView.isRange()) {
             if (mfromCalender.size() == 0) {
                 mfromCalender.add(seletedDate);
-                mselectedDate.clear();
-                mselectedDate.add(seletedDate.getTime());
+                mselectedDateList.clear();
+                mselectedDateList.add(seletedDate.getTime());
                 notifyDataSetChanged();
 
             } else {
-                mselectedDate.clear();
+                mselectedDateList.clear();
                 final Calendar fromcalendar = mfromCalender.get(0);
                 int fromDate = fromcalendar.get(Calendar.DATE);
                 int fronMonth = fromcalendar.get(Calendar.MONTH);
@@ -203,7 +203,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
                 if (fromDate <= toDate || fronMonth < toMonth || fromYear < toYear) {
                     while (fromDate <= toDate || fronMonth < toMonth || fromYear < toYear) {
                         Date rangeDate = fromcalendar.getTime();
-                        mselectedDate.add(rangeDate);
+                        mselectedDateList.add(rangeDate);
                         fromcalendar.add(Calendar.DAY_OF_MONTH, 1);
                         fromDate = fromcalendar.get(Calendar.DATE);
                         fronMonth = fromcalendar.get(Calendar.MONTH);
@@ -214,36 +214,54 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
                         }
                     }
                     mfromCalender.clear();
-                    mListener.onDateSelected(mselectedDate);
+                    mListener.onDateSelected(mselectedDateList);
                 } else {
                     mfromCalender.clear();
                     mfromCalender.add(seletedDate);
-                    singleCheck(true, checkBox, seletedDate, calendar);
+                    handleClick(true, checkBox, seletedDate, calendar);
                 }
                 notifyDataSetChanged();
-                Log.d(TAG, "Range Date Size " + mselectedDate.size());
+                Log.d(TAG, "Range Date Size " + mselectedDateList.size());
 
 
             }
-        } else {
-            singleCheck(checked, checkBox, seletedDate, calendar);
-            mListener.onDateSelected(mselectedDate);
+        } else if (CustomVerticalCalenderView.isSingleClick()){
+            if (mselectedDateList.size() != 0) {
+                Date date = mselectedDateList.get(0);
+                Calendar previousDate = Calendar.getInstance();
+                previousDate.setTime(date);
+                int day = previousDate.get(Calendar.DATE);
+                int selectedDay = seletedDate.get(Calendar.DATE);
+                mselectedDateList.clear(); // clearing the list for handling single item click
+                if (day != selectedDay) {// forcfully making the view state to true  if the view's state from recycler is false
+                    handleClick(true, checkBox, seletedDate, calendar);
+                } else {
+                    handleClick(checked, checkBox, seletedDate, calendar);
+                }
+            } else { // for the first time
+                handleClick(checked, checkBox, seletedDate, calendar);
+            }
+            notifyDataSetChanged();
+            mListener.onDateSelected(mselectedDateList);
+        } else { // by defalut multi click support
+            handleClick(checked, checkBox, seletedDate, calendar);
+            mListener.onDateSelected(mselectedDateList);
         }
 
-        Log.d(TAG, "final size " + mselectedDate.size());
+        Log.d(TAG, "final size " + mselectedDateList.size());
 
     }
 
-    private void singleCheck(boolean checked, CheckBox checkBox, Calendar seletedDate,
+    private void handleClick(boolean checked, CheckBox checkBox, Calendar seletedDate,
                              Calendar calendar) {
         Date date = seletedDate.getTime();
         if (checked) {
             checkBoxSelectedState(checkBox);
-            if (!mselectedDate.contains(date)) {
-                mselectedDate.add(date);
+            if (!mselectedDateList.contains(date)) {
+                mselectedDateList.add(date);
             }
         } else {
-            mselectedDate.remove(date);
+            mselectedDateList.remove(date);
             checkBoxUnSelectedState(checkBox, calendar, seletedDate);
         }
     }

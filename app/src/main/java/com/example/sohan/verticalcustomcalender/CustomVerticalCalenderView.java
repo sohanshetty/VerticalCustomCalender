@@ -35,6 +35,7 @@ public class CustomVerticalCalenderView extends LinearLayout implements Vertical
     private int mFromYear = 2017;
     private int mToYear = 2017;
     private static boolean mRange;
+    private static boolean mIsSingleClick;
 
     public CustomVerticalCalenderView(Context context) {
         super(context);
@@ -83,7 +84,7 @@ public class CustomVerticalCalenderView extends LinearLayout implements Vertical
     }
 
     private void clearDateSelectionList() {
-        VerticalAdapter.mselectedDate.clear();
+        VerticalAdapter.mselectedDateList.clear();
     }
 
     public void updateCalendar() {
@@ -192,6 +193,15 @@ public class CustomVerticalCalenderView extends LinearLayout implements Vertical
 
     public static boolean isRange(){
         return mRange;
+    }
+
+    public static boolean isSingleClick(){
+        return mIsSingleClick;
+
+    }
+
+    public static void setSingleClick(){
+        mIsSingleClick = true;
     }
 
     @Override

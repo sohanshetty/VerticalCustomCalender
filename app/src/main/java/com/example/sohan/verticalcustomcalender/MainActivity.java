@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements VerticalAdapter.D
         customVerticalCalenderView.setFromYear(2017);
         customVerticalCalenderView.setToYear(2017);
         customVerticalCalenderView.updateCalendar();
-        CustomVerticalCalenderView.setRange(true);
+        CustomVerticalCalenderView.setSingleClick();
         customVerticalCalenderView.setDateSelectionColor(ContextCompat.getColor(this, R.color.colorAccent));
         customVerticalCalenderView.setListener(this);
 
