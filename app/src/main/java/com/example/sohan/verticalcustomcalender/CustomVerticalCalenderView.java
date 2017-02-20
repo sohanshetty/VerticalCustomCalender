@@ -36,6 +36,7 @@ public class CustomVerticalCalenderView extends LinearLayout implements Vertical
     private int mToYear = 2017;
     private static boolean mRange;
     private static boolean mIsSingleClick;
+    private static boolean mDisablePreviousDate;
 
     public CustomVerticalCalenderView(Context context) {
         super(context);
@@ -198,6 +199,14 @@ public class CustomVerticalCalenderView extends LinearLayout implements Vertical
     public static boolean isSingleClick(){
         return mIsSingleClick;
 
+    }
+
+    public static void disablePreviousDate(){
+        mDisablePreviousDate = true;
+    }
+
+    public static boolean isPreviousDateDisabled() {
+        return mDisablePreviousDate;
     }
 
     public static void setSingleClick(){

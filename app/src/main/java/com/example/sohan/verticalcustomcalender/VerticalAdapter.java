@@ -95,18 +95,21 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
                  Calendar calendar = Calendar.getInstance();
                  calendar.setTime(dateOBj);
                  int date = calendar.get(Calendar.DATE);
-                 int month = calendar.get(Calendar.MONTH);
-                 int year = calendar.get(Calendar.YEAR);
+                /* int month = calendar.get(Calendar.MONTH);
+                 int year = calendar.get(Calendar.YEAR);*/
                  checkBox.setTag(calendar);
                  checkBox.setText(String.valueOf(date));
-                 setBackgroundColor(checkBox, date, month, year, currentMonth, Calendar.getInstance());
+                 setBackgroundColor(checkBox, calendar, currentMonth, Calendar.getInstance());
                  checkBox.setOnCheckedChangeListener(this);
                  dateListIndexCount ++;
             }
         }
     }
 
-    private void setBackgroundColor(CheckBox checkBox, int day, int month, int year, int currentMonth,Calendar today) {
+    private void setBackgroundColor(CheckBox checkBox, Calendar listCalender, int currentMonth, Calendar today) {
+        int day = listCalender.get(Calendar.DATE);
+        int month = listCalender.get(Calendar.MONTH);
+        int year = listCalender.get(Calendar.YEAR);
         checkBox.setBackgroundColor(ContextCompat.getColor(checkBox.getContext(), R.color.white));
         // clear styling
         checkBox.setTypeface(null, Typeface.NORMAL);
@@ -117,6 +120,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
             // if it is today, set it to blue/bold
             checkBox.setTypeface(null, Typeface.BOLD);
             checkBox.setTextColor(ContextCompat.getColor(checkBox.getContext(), R.color.colorPrimary));
+
         } else {
             if (month != currentMonth) {
                 // if this day is outside current month, grey it out
@@ -144,6 +148,16 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
                    // Calendar todayCalender = Calendar.getInstance();
                     //checkBoxUnSelectedState(checkBox, todayCalender, selectedCalender);
                 }
+            }
+        }
+
+        if (CustomVerticalCalenderView.isPreviousDateDisabled()) { // disable previous date disable flow
+            int daysOfYear = listCalender.get(Calendar.DAY_OF_YEAR);
+            int currentDate = today.get(Calendar.DAY_OF_YEAR);
+            int listYear = listCalender.get(Calendar.YEAR);
+            int currentYear = today.get(Calendar.YEAR);
+            if (daysOfYear < currentDate || listYear < currentYear) {
+                checkBox.setEnabled(false);
             }
         }
     }
