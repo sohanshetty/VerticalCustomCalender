@@ -111,6 +111,29 @@ public class CustomVerticalCalenderView extends LinearLayout implements Vertical
         }
     }
 
+    /**
+     * Method use to calculate last 6 month from current month
+     * @param lastNoOfMonth last no of month to display
+     */
+    public  void updateCalendar(int lastNoOfMonth){
+        if (!isInEditMode()) {
+            currentDate = Calendar.getInstance();
+            LinkedHashMap<String, List<Date>> verticalList = new LinkedHashMap<>();
+            currentDate.add(Calendar.MONTH, -lastNoOfMonth);// reset to last no of month
+                for (int i = 0; i <= lastNoOfMonth; i++) {
+                    ArrayList<Date> cells = getDatesForMonth();
+                    int month = currentDate.get(Calendar.MONTH);
+                    int year =  currentDate.get(Calendar.YEAR);
+                    String key = generateKey(month, year);
+                    Log.d(TAG, key);
+                    verticalList.put(key, cells);
+                    currentDate.add(Calendar.MONTH, 1);
+                }
+
+            updateAdater(verticalList);
+        }
+    }
+
     public void setDateSelectionColor(int color){
         mDateSelectionColor = color;
     }

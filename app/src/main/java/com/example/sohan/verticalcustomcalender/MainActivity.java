@@ -19,13 +19,14 @@ public class MainActivity extends AppCompatActivity implements VerticalAdapter.D
         setContentView(R.layout.activity_main);
         CustomVerticalCalenderView customVerticalCalenderView = (CustomVerticalCalenderView)
                 findViewById(R.id.custom_calender_view);
-        customVerticalCalenderView.setFromYear(2017);
-        customVerticalCalenderView.setToYear(2017);
-        Calendar startCal = Calendar.getInstance();
+        //customVerticalCalenderView.setFromYear(2017);
+        //customVerticalCalenderView.setToYear(2017);
+        customVerticalCalenderView.updateCalendar(6);
+       /* Calendar startCal = Calendar.getInstance();
         startCal.add(Calendar.DATE, -5);
         customVerticalCalenderView.setRangeByDefault(startCal.getTime(), Calendar.getInstance().getTime());
         customVerticalCalenderView.updateCalendar();
-        CustomVerticalCalenderView.setRange(true);
+        CustomVerticalCalenderView.setRange(true);*/
         //CustomVerticalCalenderView.setSingleClick();
         customVerticalCalenderView.setDateSelectionColor(ContextCompat.getColor(this, R.color.colorAccent));
         customVerticalCalenderView.setListener(this);
