@@ -201,6 +201,24 @@ public class CustomVerticalCalenderView extends LinearLayout implements Vertical
 
     }
 
+    public void setRangeByDefault(Date startDateObj, Date endDateObj){
+        Calendar startCalender = Calendar.getInstance();
+        startCalender.setTime(startDateObj);
+
+        Calendar endCalender = Calendar.getInstance();
+        endCalender.setTime(endDateObj);
+
+        int startDate = startCalender.get(Calendar.DATE);
+        int endDate = endCalender.get(Calendar.DATE);
+
+        while (startDate <= endDate) {
+            Date date = startCalender.getTime();
+            VerticalAdapter.mselectedDateList.add(date);
+            startCalender.add(Calendar.DATE, 1); // incrementing date by 1  i,e next date
+            startDate = startCalender.get(Calendar.DATE);
+        }
+    }
+
     public static void disablePreviousDate(){
         mDisablePreviousDate = true;
     }
