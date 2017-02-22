@@ -214,7 +214,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Holder
                 int toMonth = seletedDate.get(Calendar.MONTH);
                 int toYear = seletedDate.get(Calendar.YEAR);
 
-                if (fromDate <= toDate || fronMonth < toMonth || fromYear < toYear) {
+                if ((fromYear <= toYear) && (fromDate <= toDate || fronMonth < toMonth) || fromYear <= toYear) {
                     while (fromDate <= toDate || fronMonth < toMonth || fromYear < toYear) {
                         Date rangeDate = fromcalendar.getTime();
                         mselectedDateList.add(rangeDate);
